@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CODELAB IDE — Desktop Host</title>
+  <style>
+    body {
+      background: #07090E;
+      color: #F8FAFC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .panel {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 480px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 24px;
+      color: #818CF8;
+      margin: 0 0 8px 0;
+    }
+    p {
+      color: #94A3B8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #818CF8;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="badge">CODELAB IDE v2.0 Desktop Host</div>
+    <h1>Connecting to CODELAB IDE Engine</h1>
+    <p>Please ensure the local CODELAB web server is running on port 3000 (<code>npm run dev</code> or <code>RUN-WINDOWS.bat</code>).</p>
+    <button class="btn" onclick="window.location.reload()">Retry Connection</button>
+  </div>
+</body>
+</html>
+

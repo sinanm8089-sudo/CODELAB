@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: codeverse-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-codeverse}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-codeverse_secure_password_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-codeverse_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infrastructure/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U codeverse -d codeverse_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: codeverse-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: .
+      dockerfile: ./infrastructure/docker/Dockerfile.api
+    container_name: codeverse-api
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://codeverse:codeverse_secure_password_2026@db:5432/codeverse_db
+      JWT_SECRET: ${JWT_SECRET:-codeverse-lab-super-secret-production-key-sinan-mohammed-2026}
+      CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-flash}
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./infrastructure/docker/Dockerfile.web
+    container_name: codeverse-web
+    restart: always
+    depends_on:
+      - api
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+

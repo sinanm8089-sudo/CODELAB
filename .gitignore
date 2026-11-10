@@ -1,0 +1,56 @@
+# Environment variables & secrets (CRITICAL: Never commit API keys)
+.env
+.env*.local
+.env.development
+.env.test
+.env.production
+*.env
+
+# Dependencies
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Python virtual environments & bytecode
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+*/.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+*/.pytest_cache/
+*.egg-info/
+
+# Databases & local state
+*.db
+*.sqlite
+*.sqlite3
+codeverse.db
+
+# Next.js build outputs
+.next/
+*/.next/
+out/
+build/
+dist/
+
+# Archives & Temporary files
+*.zip
+*.tar.gz
+*.log
+tmp/
+temp/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
